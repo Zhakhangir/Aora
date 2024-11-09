@@ -1,6 +1,7 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import { icons } from '@/constants'
+import { icons } from '../constants'
+import { Video, ResizeMode } from 'expo-av'
 
 export const VideoCard = ({ video: { title, thumbnail, video, creator: { username, avatar } } }) => {
     const [play, setPlay] = useState(false)
@@ -22,12 +23,34 @@ export const VideoCard = ({ video: { title, thumbnail, video, creator: { usernam
                 </View>
             </View>
 
-            {play ? (<Text className='text-white text-xl'> Playing </Text>) : (
-                <TouchableOpacity activeOpacity={0.7} onPress={() => setPlay(!(play))} className='w-full h-60 rounded-xl mt-3 relative justify-center items-center'>
-                    <Image source={{ uri: thumbnail }} className='w-full h-full rounded-xl mt-3' resizeMode='cover' />
-                    <Image source={icons.play} className='w-12 h-12 absolute' resizeMode='contain' />
-                </TouchableOpacity>
-            )}
+            {play ?
+                (<Video
+                    source={{
+                        uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+                    }}
+                    // Use css style tailwind not working with <Video>
+                    style={{
+                        width: '100%',
+                        height: 240,
+                        marginTop: 12,
+                        borderRadius: 16
+
+                    }}
+                    useNativeControls
+                    shouldPlay
+                    resizeMode={ResizeMode.CONTAIN}
+                    onPlaybackStatusUpdate={(status) => {
+                        if (status.didJustFinish) setPlay(false)
+                    }}
+                />) : (
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => setPlay(!(play))}
+                        className='w-full h-60 rounded-xl mt-3 relative justify-center items-center'>
+                        <Image source={{ uri: thumbnail }} className='w-full h-full rounded-xl mt-3' resizeMode='cover' />
+                        <Image source={icons.play} className='w-12 h-12 absolute' resizeMode='contain' />
+                    </TouchableOpacity>
+                )}
         </View>
     )
 }

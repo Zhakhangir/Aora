@@ -2,14 +2,14 @@ import CustomButton from '../components/CustomButton'
 import React from 'react'
 import images from '../constants/images'
 import { ScrollView, Image, View, Text } from 'react-native'
-import { StatusBar } from 'expo-status-bar'
 import { Redirect, router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useGlobalContext } from '../context/GlobalProvider'
 
 const Index = () => {
-  const { isLoading, isLoggedIn } = useGlobalContext()
+  const { isLoggedIn, isLoading } = useGlobalContext()
 
+  console.log(isLoading, isLoggedIn, "auth")
   if (!isLoading && isLoggedIn) return <Redirect href='/home' />
   return (
     <SafeAreaView className='bg-primary h-full'>
@@ -38,8 +38,6 @@ const Index = () => {
             containerStyles='w-full mt-7' />
         </View>
       </ScrollView>
-
-      <StatusBar backgroundColor='#161622' style='light' />
     </SafeAreaView>
   )
 }

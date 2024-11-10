@@ -3,6 +3,7 @@ import { SplashScreen, Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
 import GlobalProvider from '../context/GlobalProvider'
 import '../global.css'
+import { StatusBar } from 'expo-status-bar'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -27,11 +28,12 @@ const RootLayout = () => {
   if (!fontsLoaded && !error) return null
   return (
     <GlobalProvider>
+      <StatusBar backgroundColor="#161622" style="light" />
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="/serach/[query]" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
       </Stack>
     </GlobalProvider>
   )

@@ -1,5 +1,5 @@
 import { Text, View, Image, Alert } from 'react-native'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ScrollView } from 'react-native'
@@ -7,8 +7,12 @@ import { images } from '../../constants'
 import FormFiled from '../../components/FormFiled'
 import CustomButton from '../../components/CustomButton'
 import { signIn } from '../../lib/appwrite'
+import { useGlobalContext } from '../../context/GlobalProvider'
+
 
 const SignIn = () => {
+  const { setUser, setIsLoggedIn } = useGlobalContext()
+
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -17,6 +21,7 @@ const SignIn = () => {
   const [isSubmitting, setSubmitting] = useState(false)
 
   const submit = async () => {
+
     if (!form.email || !form.password) {
       Alert.alert('Error', 'Please fill in all fiel')
       return
@@ -25,8 +30,9 @@ const SignIn = () => {
     setSubmitting(true)
 
     try {
-      await signIn(form.email, form.password);
-      // set it global state
+      const user = await signIn(form.email, form.password);
+      setUser(user)
+      setIsLoggedIn(true)
       router.replace('/home')
     } catch (error) {
       Alert.alert('Error', error.message)

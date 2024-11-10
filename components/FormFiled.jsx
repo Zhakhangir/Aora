@@ -21,7 +21,7 @@ const FormFiled = ({ title, value, placeholder, handleChangeText, otherStyles, k
                     className='flex-1 text-white font-psemibold text-base'
                     value={value}
                     placeholder={placeholder}
-                    placeholderText='#7b7b8b'
+                    placeholderTextColor='#7B7B8B'
                     onChangeText={handleChangeText}
                     secureTextEntry={title === "Password" && !showPassword}
                 />

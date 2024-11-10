@@ -13,7 +13,6 @@ const GlobalProvider = ({ children }) => {
     useEffect(() => {
         getCurrentUser()
             .then((user) => {
-                console.log("set user", user)
                 if (user) {
                     setIsLoggedIn(true)
                     setUser(user)
@@ -23,7 +22,7 @@ const GlobalProvider = ({ children }) => {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                throw new Error(error.message)
             })
             .finally(() => {
                 setIsLoading(false)

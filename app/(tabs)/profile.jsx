@@ -31,7 +31,7 @@ const Profile = () => {
       <FlatList
         data={posts}
         keyboardDismissMode='on-drag'
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.$id}
 
         renderItem={({ item }) => (
           <VideoCard video={item} />

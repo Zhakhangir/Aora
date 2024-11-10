@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
 import { useState } from 'react'
 import React from 'react'
-import { icons, images } from '@/constants'
+import { icons } from '../constants'
 import { router, usePathname } from 'expo-router'
 
-const SearchInput = ({ initialQuery }) => {
+const SearchInput = ({ initialQuery, placeholder }) => {
     const pathName = usePathname()
     const [query, setQuery] = useState(initialQuery || '')
     return (
@@ -13,7 +13,7 @@ const SearchInput = ({ initialQuery }) => {
             <TextInput
                 className='text-base mt-0.5 text-white flex-1 font-pregular'
                 value={query}
-                placeholder='Search for video topic'
+                placeholder={placeholder}
                 placeholderTextColor='#CDCDE0'
                 onChangeText={(e) => setQuery(e)}
             />
@@ -40,5 +40,3 @@ const SearchInput = ({ initialQuery }) => {
 }
 
 export default SearchInput
-
-const styles = StyleSheet.create({})

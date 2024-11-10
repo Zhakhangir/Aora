@@ -66,7 +66,6 @@ fs.rename(oldDirPath, newDirPath, (error) => {
         if (error) {
           return console.error(`Error creating _layout.tsx: ${error}`);
         }
-        console.log('app/_layout.tsx created.');
       });
     });
   });

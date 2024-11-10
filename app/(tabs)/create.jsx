@@ -56,7 +56,6 @@ const Create = () => {
       quality: 1
     })
 
-    console.log(result)
     if (!result.canceled) {
       if (selectType === 'image') {
         setForm({ ...form, thumbnail: result.assets[0] })
@@ -65,8 +64,6 @@ const Create = () => {
       if (selectType === 'video') {
         setForm({ ...form, video: result.assets[0] })
       }
-
-      console.log(result, "form: ------->", form)
     }
   }
 

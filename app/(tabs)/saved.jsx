@@ -10,7 +10,8 @@ import { useAppwrite } from '../../lib/useAppwrite'
 import { VideoCard } from '../../components/VideoCard'
 import { useGlobalContext } from '../../context/GlobalProvider'
 
-const Home = () => {
+
+const Saved = () => {
   const { data: posts, fetchData: refetchData } = useAppwrite(getAllPosts)
   const { data: latestPosts } = useAppwrite(getLatestPosts)
   const [refreshing, setRefreshing] = useState(false)
@@ -37,22 +38,10 @@ const Home = () => {
         ListHeaderComponent={() => (
           <View className='my-6 px-4 space-y-6'>
             <View className='justify-between items-start flex-row mb-6'>
-              <View>
-                <Text className='font-pmedium text-sm text-gray-100'> Welcome back </Text>
-                <Text className='text-2xl text-white font-psemibold'> {user?.username} </Text>
-              </View>
-
-              <View className='mt-1.5'>
-                <Image source={images.logoSmall} className='w-9 h-10' resizeMode='contain' />
-              </View>
+              <Text className='text-2xl text-white font-psemibold'>Saved Videos</Text>
             </View>
 
-            <SearchInput placeholder='Search for video topic' />
-
-            <View className='w-fill flex-1 pt-5 pb-8'>
-              <Text className='text-gray-100 text-lg font-pregular'>  Latest Vieos </Text>
-              <Trending posts={latestPosts} />
-            </View>
+            <SearchInput placeholder='Search your saved videos' />
           </View>
         )}
 
@@ -69,4 +58,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Saved
